@@ -13,6 +13,8 @@ var util = require('util');
 
 // importing routes
 const codex = require("./codex")
+const userInfo = require("./routes/userInfo")
+const auth = require("./routes/auth")
 
 // For Using Imp Environment Variables
 dotenv.config({path: "./config/config.env"})
@@ -33,7 +35,7 @@ if(process.env.NODE_ENV === "development"){
 }
 
 app.use(express.urlencoded({ extended: true }));
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 // Endpoints
 
@@ -41,7 +43,11 @@ const PORT = process.env.PORT || 3000;
 app.get("/",(req,res,next)=>{
     console.log("Backend Api is Running")
 })
-app.use('/code',codex);
+
+// Using the Imported Routes
+app.use('/code',codex)
+app.use('/user',userInfo)
+app.use('/auth',auth)
 
 app.listen(PORT, ()=>{
     console.log(`Server started on port ${PORT}`)

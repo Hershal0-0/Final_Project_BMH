@@ -1,17 +1,34 @@
 import React,{useEffect} from "react"
-
+import {BrowserRouter as Router, Route,Switch} from 'react-router-dom'
 // Importing Components
 import Trial from "./components/Trial";
+import Login from "./components/Login"
+import Dashboard from './components/Dashboard'
 
 // Import Redux requirements
 import { Provider } from 'react-redux'
 import store from './store'
+import {loadUser} from './actions/auth'
+import setAuthToken from "./utils/setAuthToken";
+
+if(localStorage.token){
+  setAuthToken(localStorage.token)
+}
 
 
 function App() {
+  useEffect(()=>{
+    store.dispatch(loadUser())
+  },[])
   return (
     <Provider store={store}>
-      <Trial />
+      <Router>
+        <Switch>
+            <Route exact path="/trial" component={Trial} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/dashboard" component={Dashboard} />
+        </Switch>
+      </Router>
     </Provider>
   );
 }
