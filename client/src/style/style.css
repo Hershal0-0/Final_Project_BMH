@@ -1,0 +1,28 @@
+.bt {
+  width: 100px;
+  background-color: #5995fd;
+  border: none;
+  outline: none;
+  height: 49px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.navbar {
+  background-color: steelblue;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.nav-text {
+  color: #fff;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+}

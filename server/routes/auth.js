@@ -11,7 +11,7 @@ const auth = require("../middleware/auth")
 
 const router = express.Router()
 
-// @route GET /auth
+// @route GET api/auth
 // @desc Test Route to check middleware
 // @access Public
 router.get("/",auth,async(req,res,next)=>{

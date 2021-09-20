@@ -8,11 +8,12 @@ const UserInfo = require("../models/UserInfo")
 
 const router = express.Router()
 
-// @route POST /users
+// @route POST api/users
 // @desc  Register a New User
 // @access Public
 router.post("/",[
-    check("name","Name is requires").not().isEmpty(),
+    check("name","Name is required").not().isEmpty(),
+    check("designation","Designation is required").not().isEmpty(),
     check("email","Please Enter a Valid Email").isEmail(),
     check("password","Please Enter a password with 6 or more characters").isLength({
         min:6
@@ -24,7 +25,7 @@ router.post("/",[
             errors: errors.array()
         })
     }
-    const {name,rollno,email,password}=req.body
+    const {name,rollno,designation,email,password}=req.body
 
     try {
         // See if the user exists
@@ -34,9 +35,17 @@ router.post("/",[
                 errors: [{msg: "User Already Exists" }]
             })
         }
+        if(designation=="Faculty" || designation=="Student"){
+            console.log(designation)            
+        }else{
+            return res.status(400).json({
+                errors:[{msg:"Invalid designation, Try Again44"}]
+            })
+        }
         user = new UserInfo({
             name,
             rollno,
+            designation,
             email,
             password
         })
@@ -50,7 +59,7 @@ router.post("/",[
         // Return JWT
         const payload = {
             user:{
-                id : user.id
+                id : user._id
             }
         }
 

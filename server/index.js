@@ -14,6 +14,8 @@ var util = require('util');
 // importing routes
 const codex = require("./codex")
 const userInfo = require("./routes/userInfo")
+const solution = require('./routes/solution')
+const problem = require('./routes/problem')
 const auth = require("./routes/auth")
 
 // For Using Imp Environment Variables
@@ -45,9 +47,11 @@ app.get("/",(req,res,next)=>{
 })
 
 // Using the Imported Routes
-app.use('/code',codex)
-app.use('/user',userInfo)
-app.use('/auth',auth)
+app.use('/api/code',codex)
+app.use('/api/user',userInfo)
+app.use('/api/auth',auth)
+app.use('/api/solution',solution)
+app.use('/api/problem',problem)
 
 app.listen(PORT, ()=>{
     console.log(`Server started on port ${PORT}`)

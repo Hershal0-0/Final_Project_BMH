@@ -1,17 +1,13 @@
 const mongoose = require('mongoose')
 
-const UserSchema = new mongoose.Schema({
+const FacultySchema = new mongoose.Schema({
     name:{
         type: String,
         required: true,
     },
-    rollno:{
+    emp_no:{
         type:String,
         required:true,
-    },
-    designation:{
-        type:String,
-        required:true
     },
     email:{
         type:String,
@@ -23,6 +19,6 @@ const UserSchema = new mongoose.Schema({
     }
 })
 
-const UserInfo = mongoose.model('user_info',UserSchema)
+const FacultyInfo = mongoose.model('faculty_info',UserSchema)
 
-module.exports = UserInfo
+module.exports = FacultyInfo

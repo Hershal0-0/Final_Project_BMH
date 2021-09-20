@@ -4,10 +4,10 @@ import '../style/signin_signup.css'
 
 // import Redux related
 import {connect} from 'react-redux'
-import {login} from '../actions/auth'
+import {login,registerUser} from '../actions/auth'
 import PropTypes from 'prop-types'
 
-const Login = ({login,isAuthenticated}) => {
+const Login = ({login,isAuthenticated,registerUser}) => {
     
     
     function handleSignUp(){
@@ -20,9 +20,8 @@ const Login = ({login,isAuthenticated}) => {
     const [loginFormData,setLoginFormData]=useState({
         email:"",
         password:""
-    })
-    const {email,password} = loginFormData
-
+    })    
+    const {email,password} = loginFormData    
     const onChange= (e)=>{
         setLoginFormData({
             ...loginFormData,
@@ -30,9 +29,44 @@ const Login = ({login,isAuthenticated}) => {
         })
     }
 
-    const handleSubmit = (e)=>{
+    const handleLogin = (e)=>{
         e.preventDefault()
         login({email,password})
+    }
+    const [registerFormData,setRegisterFormData]=useState({
+      regName:"",
+      regRollno:"",
+      regDesignation:"",
+      regEmail:"",
+      regPassword:""
+  })
+    const {regName,regRollno,regDesignation,regEmail,regPassword}=registerFormData
+
+    const onChangeReg= (e)=>{
+      setRegisterFormData({
+        ...registerFormData,
+        [e.target.name] : e.target.value
+      })
+
+    }
+
+    const handleRegister = (e)=>{
+      e.preventDefault()
+      const body={
+        name:regName,
+        rollno:regRollno,
+        designation: regDesignation,
+        email: regEmail,
+        password: regPassword
+      }
+      console.log(body)
+      registerUser({
+        name:regName,
+        rollno:regRollno,
+        designation: regDesignation,
+        email: regEmail,
+        password: regPassword
+      })
     }
 
     // Redirect if Logged in 
@@ -44,7 +78,7 @@ const Login = ({login,isAuthenticated}) => {
         <div className="container">
             <div className="forms-container">
                 <div className="signin-signup">
-                <form className="sign-in-form" onSubmit={e => handleSubmit(e)} >
+                <form className="sign-in-form" onSubmit={e => handleLogin(e)} >
                     <h2 className="title">Sign In</h2>
 
                     <div className="input-field">
@@ -74,20 +108,80 @@ const Login = ({login,isAuthenticated}) => {
                     <input type="submit"  className="btn solid" value="Login"/>
                     
                 </form>
-                <form action="#" className="sign-up-form">
-                    <h2 className="title">Sign In</h2>
+
+
+                <form onSubmit={(e)=> handleRegister(e)} className="sign-up-form">
+                    <h2 className="title">Sign Up</h2>
 
                     <div className="input-field">
                     <i className="fas fa-user"></i>
-                    <input type="text" placeholder="Username" />
+                    <input 
+                    type="text"
+                    name="regName"
+                    value={regName}
+                    onChange={(e)=> onChangeReg(e)}
+                    placeholder="Username"
+                    required />
                     </div>
 
                     <div className="input-field">
-                        <i className="fas fa-lock"></i>
-                        <input type="password" placeholder="Password" />
+                    <i className="fas fa-id-badge"></i>
+                    <input 
+                    type="text" 
+                    name="regRollno"
+                    value={regRollno}
+                    onChange={(e)=> onChangeReg(e)}
+                    placeholder="RollNo" 
+                    required />
+                    </div>
+
+                    <div className="radio-div input-field">                    
+                    <div>
+                    <input 
+                    type="radio" 
+                    value="Student" 
+                    name="regDesignation" 
+                    onChange={(e)=> onChangeReg(e)}
+                    required/> Student
                     </div>
                     
-                    <input type="submit"  className="btn solid" value="Login"/>
+                    <div>
+                    <input 
+                    type="radio" 
+                    value="Faculty" 
+                    name="regDesignation" 
+                    onChange={(e)=> onChangeReg(e)}
+                    required/> Faculty
+                    </div>
+
+                    </div>
+
+                    <div className="input-field">
+                    <i className="fas fa-at"></i>
+                    <input 
+                    type="email"
+                    name="regEmail"
+                    value={regEmail} 
+                    onChange={(e)=> onChangeReg(e)}
+                    placeholder="Email" 
+                    required />
+                    </div>            
+
+                    <div className="input-field">
+                        <i className="fas fa-lock"></i>
+                        <input 
+                        type="password" 
+                        name="regPassword"
+                        value={regPassword}
+                        onChange={(e)=> onChangeReg(e)}
+                        placeholder="Password" 
+                        required />
+                    </div>
+                    
+                    <input 
+                    type="submit"  
+                    className="btn solid"                   
+                    value="Register"/>
                     
                 </form>
                 </div>
@@ -105,7 +199,7 @@ const Login = ({login,isAuthenticated}) => {
               Sign up
             </button>
           </div>
-          <img src="/Users/hershalrao/Desktop/Final_Project_BMH/client/src/svg/maker_launch.svg" className="image" alt="" />
+          <img src="" className="image" alt="" />
         </div>
         <div className="panel right-panel">
           <div className="content">
@@ -118,7 +212,7 @@ const Login = ({login,isAuthenticated}) => {
               Sign in
             </button>
           </div>
-          <img src="svg/register.svg" className="image" alt="" />
+          <img src="" className="image" alt="" />
         </div>
       </div>
         </div>
@@ -127,6 +221,7 @@ const Login = ({login,isAuthenticated}) => {
 
 Login.propTypes = {
     login : PropTypes.func.isRequired,
+    registerUser: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool
 }
 
@@ -134,7 +229,7 @@ const mapStateToProps = (state) => ({
     isAuthenticated: state.auth.isAuthenticated
 })
 
-export default connect(mapStateToProps,{login})(Login)
+export default connect(mapStateToProps,{login,registerUser})(Login)
 
                 
                 

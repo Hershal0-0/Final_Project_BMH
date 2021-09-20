@@ -1,8 +1,10 @@
 import {combineReducers} from 'redux'
-import trial from './trial'
 import auth from './auth'
+import problem from './problem'
+import solution from './solution'
 
 export default combineReducers({
-    trial,
-    auth
+    auth,
+    problem,
+    solution
 })
