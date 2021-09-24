@@ -27,7 +27,8 @@ router.get('/',async(req,res,next)=>{
 // @desc Create a Problem
 // @acess Private
 router.post('/',[auth,[
-    check('problem_statement',"Problem Statement is Reequired").not().isEmpty()    
+    check('problem_title',"Problem Title Is Required").not().isEmpty(),
+    check('problem_statement',"Problem Statement is Required").not().isEmpty()    
 ]],async(req,res,next)=>{
     const errors = validationResult(req)
     if(!errors.isEmpty()){
@@ -40,6 +41,7 @@ router.post('/',[auth,[
         const newProblem = {
             faculty_id: req.user.id,
             faculty_name:user.name,
+            problem_title:req.body.problem_title,
             problem_statement: req.body.problem_statement,            
         }
         const problem = new Problem(newProblem)

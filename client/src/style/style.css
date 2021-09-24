@@ -1,3 +1,7 @@
+* {
+  margin: 0;
+  padding: 0;
+}
 .bt {
   width: 100px;
   background-color: #5995fd;
@@ -25,4 +29,28 @@
   display: flex;
   align-items: center;
   margin-left: 1rem;
+}
+.d-flex {
+  display: flex;
+}
+.problem {
+  flex: 1;
+  width: auto;
+  background-color: skyblue;
+  margin-bottom: 1rem;
+}
+
+.code-editor {
+  flex: 9;
+  overflow-y: scroll;
+  border: 1px solid olive;
+}
+
+.prob-container {
+  height: 200px;
+}
+
+textarea:focus {
+  height: 200px !important;
+  outline: none;
 }

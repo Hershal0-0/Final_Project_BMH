@@ -25,8 +25,8 @@ const auth = (state=initialState,action)=>{
             return{
                 ...state,
                 ...payload,
-                isAuthenticated:true,
-                loading:false
+                isAuthenticated:true
+                
             }
         case REGISTER_FAIL:
         case AUTH_ERROR:
@@ -40,12 +40,13 @@ const auth = (state=initialState,action)=>{
                isAuthenticated:false,
                loading:false               
            }
-        case USER_LOADED:
+        case USER_LOADED:        
            return {
                ...state,
                isAuthenticated:true,
                loading:false,
-               user: payload
+               user: payload,
+               loading:false
            }
 
         default:

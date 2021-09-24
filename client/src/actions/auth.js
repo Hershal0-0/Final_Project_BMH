@@ -45,7 +45,7 @@ async dispatch =>{
         dispatch({
             type:REGISTER_SUCCESS,
             payload:res.data
-        })
+        })    
         dispatch(loadUser())
     } catch (err) {
         const errors = err.response
@@ -67,10 +67,11 @@ async dispatch => {
     const body = JSON.stringify({email,password})
     try {
         const res = await axios.post('http://localhost:5000/api/auth',body,config)
-        await dispatch({
+        dispatch({
             type:LOGIN_SUCCESS,
             payload:res.data
         })
+        // console.log(res.data)
         dispatch(loadUser())
     } catch (err) {
         const errors = err.response

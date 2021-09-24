@@ -23,9 +23,25 @@ const StudentDashboard = ({
         getProblems()
     },[])
     return (
-        <div>
-            Student Dashboard
+        <div style={{width:"100%"}}>
+            <div style={{margin:"1rem 0 1rem 0"}}>
+                <h3>Problems</h3>
+            </div>
+            
+            <div className="d-flex prob-container">
+            <div style={{flex:"11"}}>
+                {problems.map((problem,index)=>{
+                    return(
+                        <div className="problem" key={index}>
+                            <h5>{problem.problem_title}</h5>
+                            <p>Teacher:{problem.faculty_name}</p>
+                        </div>
+                    )
+                })}
+            </div>
+            <div className="code-editor">
             <Editor
+            
             value={code}
             onValueChange={code => setCode( code )}
             highlight={code => highlight(code, languages.js)}
@@ -35,6 +51,9 @@ const StudentDashboard = ({
             fontSize: 12,
             }}
             />
+            </div>            
+            </div>
+            
         </div>
     )
 }

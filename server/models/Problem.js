@@ -5,6 +5,10 @@ const ProblemSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref:"user_info"
     },
+    problem_title:{
+        type:String,
+        required:true
+    },
     problem_statement:{
         type: String,
         required:true

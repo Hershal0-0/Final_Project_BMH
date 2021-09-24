@@ -1,10 +1,10 @@
-import React from 'react'
-import "../style/style.css"
+import React, { useEffect } from 'react'
+
 // Importing Redux Requirement
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import { Redirect } from 'react-router'
-import { logout } from '../actions/auth'
+import { loadUser, logout } from '../actions/auth'
 import StudentDashboard from './StudentDashboard'
 import FacultyDashboard from './FacultyDashboard'
 
@@ -22,66 +22,74 @@ import FacultyDashboard from './FacultyDashboard'
 // }
 
 
-const Dashboard = ({user,isAuthenticated,logout}) => {
-    
+const Dashboard = ({
+    auth,
+    isAuthenticated,
+    logout,loadUser}) => {
+    // useEffect(()=>{
+    //     loadUser()
+    // },[])
     if(!isAuthenticated){
        return (<Redirect to='/login' />)
     }
-    console.log(user)
-    if(user.designation == "Student"){
-        return (
-            <div>
-                <div className="navbar">
-                <div className="nav-text">
-                    Student Dashboard -{user.name}
-                </div>
+    if(auth.user !== null){
+        if(auth.user.designation === "Student"){
+            return (
                 <div>
-                    <button className="bt nav-bt" onClick={()=>logout()}>
-                        <i className="fas fa-sign-out-alt"></i>
-                        Logout
-                    </button>
+                    <div className="navbar">
+                    <div className="nav-text">
+                        Student Dashboard -{auth.user.name}
+                    </div>
+                    <div>
+                        <button className="bt nav-bt" onClick={()=>logout()}>
+                            <i className="fas fa-sign-out-alt"></i>
+                            Logout
+                        </button>
+                    </div>
+                    </div>
+                    <StudentDashboard />
+                    
                 </div>
-                </div>
-                <StudentDashboard />
-                
-            </div>
-        )
-    }
-    if(user.designation == "Faculty"){
-        return (
-            <div>
-                <div className="navbar">
-                <div className="nav-text">
-                    Faculty Dashboard -{user.name}
-                </div>
+            )
+        }
+        if(auth.user.designation === "Faculty"){
+            return (
                 <div>
-                    <button className="bt nav-bt" onClick={()=>logout()}>
-                        <i className="fas fa-sign-out-alt"></i>
-                        Logout
-                    </button>
+                    <div className="navbar">
+                    <div className="nav-text">
+                        Faculty Dashboard -{auth.user.name}
+                    </div>
+                    <div>
+                        <button className="bt nav-bt" onClick={()=>logout()}>
+                            <i className="fas fa-sign-out-alt"></i>
+                            Logout
+                        </button>
+                    </div>
+                    </div>
+                    <FacultyDashboard />
+                    
                 </div>
-                </div>
-                <FacultyDashboard />
-                
-            </div>
-        )
+            )
+        }
+    
     }
-    return (
+        return (
         <div>
-            DashBoard-
-            <button className="bt" onClick={()=>logout()}>Logout</button>
+            {/* DashBoard-
+            <button className="bt" onClick={()=>logout()}>Logout</button> */}
         </div>
     )
 }
 
 Dashboard.propTypes = {
-    user: PropTypes.object,
+    auth: PropTypes.object,
     isAuthenticated: PropTypes.bool,
     logout:PropTypes.func.isRequired,
+    loadUser: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state)=>({
-    user:state.auth.user,
+    auth:state.auth,
     isAuthenticated:state.auth.isAuthenticated
 })
-export default connect(mapStateToProps,{logout})(Dashboard)
+export default connect(mapStateToProps,{logout,loadUser})(Dashboard)
