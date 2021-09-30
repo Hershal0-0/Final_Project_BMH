@@ -14,7 +14,7 @@ const router = express.Router()
 // @acess Public
 router.get('/',async(req,res,next)=>{
     try {
-       const problems = await Problem.find() 
+       const problems = await Problem.find().select('-testcases')
        res.json(problems)
     } catch (err) {
         console.error(err.message)

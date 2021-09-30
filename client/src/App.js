@@ -11,6 +11,7 @@ import store from './store'
 import {loadUser} from './actions/auth'
 import setAuthToken from "./utils/setAuthToken";
 import "./style/style.css"
+import Solve from "./components/Solve";
 if(localStorage.token){
   setAuthToken(localStorage.token)
 }
@@ -27,6 +28,7 @@ function App() {
             <Route exact path="/trial" component={Trial} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/dashboard" component={Dashboard} />
+            <Route exact path="/solve/:id" component={Solve} />
         </Switch>
       </Router>
     </Provider>

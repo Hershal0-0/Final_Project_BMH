@@ -25,20 +25,21 @@ async dispatch =>{
 }
 
 // Add a Problem
-export const addProblem = ({problem_statement})=>
+export const addProblem = (formData)=>
 async dispatch =>{
     try {
         const config = {
             headers:{
-                "Content-Type":"application/x-www-form-urlencoded;charset=utf-8"
+                "Content-Type":"application/json"
             }
         }
-        const body = JSON.stringify({problem_statement})
+        const body = JSON.stringify(formData)
         const res = await axios.post('http://localhost:5000/api/problem',body,config)
         dispatch({
             type: POST_PROBLEM,
             payload : res.data
         })
+        return res.data._id
 
     } catch (err) {
         dispatch({
@@ -57,7 +58,11 @@ async dispatch =>{
                 'Content-Type':"application/x-www-form-urlencoded;charset=utf-8"
             }
         }
-        const body = JSON.stringify({input,output,problem_id})
+        const body = new URLSearchParams();
+        body.append('problem_id',problem_id);
+        body.append('input',input);
+        body.append('output',output);
+        
         const res = await axios.put('http://localhost:5000/api/problem',body,config)
         dispatch({
             type:ADD_TESTCASE,

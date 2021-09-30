@@ -33,24 +33,113 @@
 .d-flex {
   display: flex;
 }
+.justify-content-center {
+  justify-content: center;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
 .problem {
-  flex: 1;
+  justify-content: space-between;
   width: auto;
-  background-color: skyblue;
+  background-color: #e0e0e0;
   margin-bottom: 1rem;
+}
+
+.prob-title {
+  font-size: 1.4rem;
+}
+
+.solve-btn-container {
+  display: flex;
+  align-items: center;
+  margin-right: 0.5rem;
+}
+
+.solve-btn {
+  all: unset;
+  text-decoration: unset;
+}
+
+.solve-btn:active {
+  color: black;
 }
 
 .code-editor {
   flex: 9;
-  overflow-y: scroll;
+
   border: 1px solid olive;
+  height: 510px;
+}
+.c-editor {
+  height: 300px !important;
+}
+
+.c-editor:focus {
+  outline: none;
 }
 
 .prob-container {
-  height: 200px;
+  height: 600px;
+  overflow-y: scroll;
 }
 
-textarea:focus {
-  height: 200px !important;
-  outline: none;
+.solve-container {
+  justify-content: space-between;
+  margin-top: 2rem;
+  padding: 0 0.5rem 0 0.5rem;
+}
+
+.solve-prob {
+  flex: 11;
+  background-color: #e0e0e0;
+  padding: 0.5rem 0 0.5rem 0;
+}
+
+.prob-statement {
+  height: 400px;
+  overflow-y: scroll;
+  margin: 0 0.5rem 2rem 2rem;
+}
+
+.faculty-container {
+  width: 60%;
+  flex-direction: column;
+}
+
+.tabs {
+  flex: 1;
+  padding: 1rem 0 1rem 0;
+  border: 1px solid black;
+}
+
+.faculty-container-main {
+  width: 100%;
+  background-color: #e0e0e0;
+  border: 1px solid black;
+  height: 400px;
+  overflow-y: scroll;
+}
+
+.testcase-container {
+  width: 80%;
+  margin-bottom: 2rem;
+}
+
+.test-input {
+  flex: 1;
+  border: 1px solid olive;
+  margin-right: 0.5rem;
+}
+
+.test-output {
+  flex: 1;
+  border: 1px solid olive;
+  margin-left: 0.5rem;
 }

@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import { Redirect } from 'react-router'
 import { loadUser, logout } from '../actions/auth'
+import Navbar from './Navbar'
 import StudentDashboard from './StudentDashboard'
 import FacultyDashboard from './FacultyDashboard'
 
@@ -36,7 +37,7 @@ const Dashboard = ({
         if(auth.user.designation === "Student"){
             return (
                 <div>
-                    <div className="navbar">
+                    {/* <div className="navbar">
                     <div className="nav-text">
                         Student Dashboard -{auth.user.name}
                     </div>
@@ -46,7 +47,8 @@ const Dashboard = ({
                             Logout
                         </button>
                     </div>
-                    </div>
+                    </div> */}
+                    <Navbar />
                     <StudentDashboard />
                     
                 </div>
@@ -55,7 +57,7 @@ const Dashboard = ({
         if(auth.user.designation === "Faculty"){
             return (
                 <div>
-                    <div className="navbar">
+                    {/* <div className="navbar">
                     <div className="nav-text">
                         Faculty Dashboard -{auth.user.name}
                     </div>
@@ -65,7 +67,8 @@ const Dashboard = ({
                             Logout
                         </button>
                     </div>
-                    </div>
+                    </div> */}
+                    <Navbar />
                     <FacultyDashboard />
                     
                 </div>

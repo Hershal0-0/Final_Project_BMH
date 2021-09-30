@@ -5,6 +5,10 @@ const SolutionSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref:'user_info'
     },
+    problem_id:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'solution'
+    },
     name:{
         type:String,
         required: true

@@ -8,6 +8,7 @@ import {
 const initialState={
     problems:[],
     problem:null,
+    newProbId:null,
     error:null
 }
 
@@ -23,7 +24,8 @@ const problem = (state=initialState,action)=>{
         case POST_PROBLEM:
             return{
                 ...state,
-                problems:[payload,...state.problems]
+                problems:[payload,...state.problems],
+                newProbId:payload._id
             }
         case ADD_TESTCASE:
             return{
