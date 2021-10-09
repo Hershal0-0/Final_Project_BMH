@@ -27,9 +27,9 @@ const Dashboard = ({
     auth,
     isAuthenticated,
     logout,loadUser}) => {
-    // useEffect(()=>{
-    //     loadUser()
-    // },[])
+    useEffect(()=>{
+        loadUser()
+    },[])
     if(!isAuthenticated){
        return (<Redirect to='/login' />)
     }

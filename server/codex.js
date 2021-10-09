@@ -5,12 +5,18 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const app = express();
 const {exec} = require('child_process');
+const {check,validationResult} = require('express-validator')
+
+// importing models
+const Problem = require('./models/Problem')
 
 
-router.route('/:lang').post(function(req,res){
-		
-	
-	//console.log(req.body.code);
+router.post('/:lang',[
+	check('problem_id',"Problem Id is Required").not().isEmpty()
+],async(req,res,next)=>{
+		try {
+			const problem = await Problem.findById(req.body.problem_id)
+			// console.log(problem)
 	switch(req.params.lang){
 		case 'py':
 // FOR PYTHON			
@@ -19,8 +25,24 @@ router.route('/:lang').post(function(req,res){
 					console.log(err);
 				}
 			});
-			let code,code_error=false,code_output,timeout = false;
-			exec("timeout -s SIGKILL 5 python3 ./code/test.py <./code/input.txt", {maxBuffer: 1024 * 999999999999999999} ,(err,stdout,stderr)=>{
+			let val = 1		
+			problem.testcases.map(testcase=>{
+				const fd = "./code/input"+val.toString()+".txt"
+				fs.writeFile(fd,testcase.input,(err)=>{
+					if(err){
+						console.log(err)
+					}
+				})
+				val++
+			})
+			val = 1
+			
+			let result = {}
+			problem.testcases.map((testcase,index)=>{
+				let code,code_error=false,code_output,timeout = false;
+				let ind=index+1
+
+			exec(`timeout -s SIGKILL 5 python3 ./code/test.py <./code/input${ind}.txt`, {maxBuffer: 1024 * 999999999999999999} ,(err,stdout,stderr)=>{
 				if(err){
 					console.log('err' + err.message);
 				}
@@ -36,19 +58,30 @@ router.route('/:lang').post(function(req,res){
 				else{
 					if(code_error){
 						code_error = false;
-						return res.end(stderr);
+						result[ind]= stderr;
+						return
 					}
 					if(timeout){
 						timeout = false;
-						return res.end("Timed Out");
+						result[ind]="Timed Out"
+						return 
 					}
 					else if(!code_error && !timeout){
-						console.log(stdout);
-						return res.end(stdout);
+						result[ind]=stdout
+						return 
 					}
 				}
 			});
+			
+			})
+			setTimeout(()=>{
+				if(result.length!=0){
+					res.json(result)
+				}
+			},3000)
+			
 			break;
+
 
 //FOR CPP
 		case 'cpp':
@@ -94,7 +127,10 @@ router.route('/:lang').post(function(req,res){
 			console.log("Wrong language");
 			res.send("WRONG LANGUAGE");
 	}
-	
+		} catch (err) {
+			console.error(err.message)
+			res.status(500).send("Server Error")
+		}	
 });
 
 

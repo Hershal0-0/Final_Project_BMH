@@ -1,4 +1,1 @@
-for _ in range(int(input())):
-	n = int(input())
-	
-	print(n*n*n + n)
+print("hellllllllll")
