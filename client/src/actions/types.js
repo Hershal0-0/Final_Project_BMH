@@ -10,6 +10,7 @@ export const PROBLEM_ERROR = 'PROBLEM_ERROR'
 
 // Action Types For Solution
 export const POST_SOLUTION = 'POST_SOLUTION'
+export const GET_SCORE = 'GET_SCORE'
 export const SOLUTION_ERROR = 'SOLUTION_ERROR'
 
 // Action Types For Auth

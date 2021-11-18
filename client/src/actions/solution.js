@@ -1,7 +1,8 @@
 import axios from "axios";
 import {
     POST_SOLUTION,
-    SOLUTION_ERROR
+    SOLUTION_ERROR,
+    GET_SCORE
 } from './types'
 
 // Post a Solution
@@ -21,6 +22,33 @@ async dispatch =>{
         const res = await axios.post('http://localhost:5000/api/solution',body,config)
         dispatch({
             type:POST_SOLUTION,
+            payload: res.data
+        })
+    } catch (err) {
+        dispatch({
+            type:SOLUTION_ERROR,
+            payload:err
+        })
+    }
+}
+
+// GET SCORE
+export const getScore = ({problem_id,language,code})=>
+async dispatch =>{
+    try {
+        const config = {
+            headers:{
+                "Content-Type":"application/x-www-form-urlencoded;charset=utf-8"
+            }
+        }
+        const body = new URLSearchParams();
+        body.append('problem_id',problem_id);
+        
+        body.append('code',code);
+        // const body = JSON.stringify(formData)
+        const res = await axios.post(`http://localhost:5000/api/code/${language}`,body,config)
+        dispatch({
+            type:GET_SCORE,
             payload: res.data
         })
     } catch (err) {

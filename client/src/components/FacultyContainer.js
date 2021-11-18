@@ -11,6 +11,8 @@ import { getProblems, addProblem, addTestcase } from '../actions/problem'
 
 const FacultyContainer = ({
     getProblems,
+    problems,
+    user,
     addProblem,
     addTestcase,
     newProbId,
@@ -41,6 +43,9 @@ const FacultyContainer = ({
             })
         }
     },[newProbId])
+    useEffect(()=>{
+        getProblems()
+    },[])
 
     const onChange = (e)=> setFormData({
         ...formData,
@@ -55,14 +60,34 @@ const FacultyContainer = ({
     if(content==="my-prob"){
         return(
             <div>
-                My Problems
+                {problems.map((problem,index)=>{
+                    if(problem.faculty_id==user._id){
+                        
+                        console.log(user._id)
+                        return(
+                            <div key={index}>
+                                {problem.problem_title}
+                                <hr />
+                            </div>
+                        )
+                    }
+                })}
             </div>
         )
     }
     if(content==="all-prob"){
         return(
             <div>
-                All Problems
+                {problems.map((problem,index)=>{
+                    
+                        return(
+                            <div key={index}>
+                                {problem.problem_title}
+                                <hr />
+                            </div>
+                        )
+                    
+                })}
             </div>
         )
     }
@@ -142,6 +167,7 @@ FacultyContainer.propTypes = {
 
 const mapStateToProps= (state) =>({
     problems:state.problem.problems,
+    user:state.auth.user,
     newProbId: state.problem.newProbId
 })
 

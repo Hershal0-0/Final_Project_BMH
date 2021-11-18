@@ -18,7 +18,7 @@ router.post('/:lang',[
 			const problem = await Problem.findById(req.body.problem_id)
 			// console.log(problem)
 	switch(req.params.lang){
-		case 'py':
+		case 'Python':
 // FOR PYTHON			
 			fs.writeFile('./code/test.py',req.body.code,(err)=>{
 				if(err){
@@ -76,6 +76,15 @@ router.post('/:lang',[
 			})
 			setTimeout(()=>{
 				if(result.length!=0){
+					score = 0
+					problem.testcases.map((testcase,index)=>{
+						result[problem.testcases.length+index+1]=testcase.output
+						if (testcase.output== result[index+1]){
+							score++;
+						}
+					})
+					result["score"]=score;
+					result["length"] = problem.testcases.length
 					res.json(result)
 				}
 			},3000)

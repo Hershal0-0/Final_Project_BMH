@@ -1,11 +1,13 @@
 import {
+    GET_SCORE,
     POST_SOLUTION, SOLUTION_ERROR
 } from '../actions/types'
 
 const initialState = {
     code:null,
     result:null,
-    error:null
+    error:null,
+    codex_result:null,
 }
 
 const solution = (state=initialState,action)=>{
@@ -17,6 +19,11 @@ const solution = (state=initialState,action)=>{
                 ...state,
                 code: payload.code,
                 result: payload.result
+            }
+        case GET_SCORE:
+            return{
+                ...state,
+                codex_result:payload
             }
         case SOLUTION_ERROR:
             return{

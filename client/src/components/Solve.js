@@ -9,14 +9,17 @@ import 'prismjs/components/prism-javascript';
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import { Redirect } from 'react-router'
-import {postSolution} from '../actions/solution'
+import {postSolution,getScore} from '../actions/solution'
+
 
 const Solve = ({
     isAuthenticated,
     user,
     problems,
+    solution,
     match,
-    postSolution
+    postSolution,
+    getScore
     }) => {
     
     const [problem,setProblem]= useState(null)
@@ -30,14 +33,40 @@ const Solve = ({
        setProblem(temp[0])
     },[])
 
+    useEffect(()=>{
+        console.log(solution)
+    },[solution])
+
     const handleSubmit = () =>{
         const formData={
             problem_id:match.params.id,
             language:language,
             code:code
         }
-        console.log(formData)
+        // console.log(formData)
         postSolution(formData)
+        getScore(formData)
+    }
+
+    const RenderSolution = () =>{
+        if(solution!=null){
+            if(solution.score>0){
+                return(
+                    <div className="codex-result score-danger">
+                    <h1>Score:{solution.score}/{solution.length}</h1>
+                    </div>
+                )
+            }else{
+                return(
+                    <div className="codex-result score-safe">
+                    <h1>Score:{solution.score}/{solution.length}</h1>
+                    </div>
+                )
+            }
+        }
+        else{
+            return null;
+        }
     }
 
     if(!isAuthenticated){
@@ -91,6 +120,9 @@ const Solve = ({
 
                     </div>
                 </div>
+                
+                <RenderSolution />
+                
             </div>
         )
     }
@@ -108,12 +140,14 @@ Solve.propTypes = {
     user: PropTypes.object,
     problems: PropTypes.array.isRequired,
     postSolution: PropTypes.func.isRequired,
+    getScore: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) =>({
     isAuthenticated: state.auth.isAuthenticated,
     user: state.auth.user,
-    problems:state.problem.problems
+    problems:state.problem.problems,
+    solution:state.solution.codex_result
 })
 
-export default connect(mapStateToProps,{postSolution})(Solve)
+export default connect(mapStateToProps,{postSolution,getScore})(Solve)
