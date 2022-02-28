@@ -160,8 +160,10 @@ router.post('/:lang',[
 						return 
 					}
 					else if(!code_error && !timeout){
+
 						const new_stdout = stdout.replace(/^\s+|\s+$/g, '')
 						result2[ind]=new_stdout
+
 						return 
 					}
 				}
@@ -252,8 +254,10 @@ router.post('/:lang',[
 						return 
 					}
 					else if(!code_error && !timeout){
+
 						const new_stdout = stdout.replace(/^\s+|\s+$/g, '')
 						result3[ind]=new_stdout
+
 						return 
 					}
 				}
@@ -346,8 +350,10 @@ router.post('/:lang',[
 							return 
 						}
 						else if(!code_error && !timeout){
+
 							const new_stdout = stdout.replace(/^\s+|\s+$/g, '')
 						    result4[ind]=new_stdout
+
 							return 
 						}
 					}
