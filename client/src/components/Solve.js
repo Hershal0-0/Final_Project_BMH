@@ -38,6 +38,10 @@ const Solve = ({
     },[solution])
 
     const handleSubmit = () =>{
+        // let new_code = code.toString()
+        // if(new_code[new_code.length-1]=='\n'){
+        //     new_code = new_code.substring(0,new_code.length-1)
+        // }
         const formData={
             problem_id:match.params.id,
             language:language,

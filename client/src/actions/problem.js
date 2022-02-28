@@ -58,10 +58,11 @@ async dispatch =>{
                 'Content-Type':"application/x-www-form-urlencoded;charset=utf-8"
             }
         }
+        const new_output= output.replace(/^\s+|\s+$/g, '')
         const body = new URLSearchParams();
         body.append('problem_id',problem_id);
         body.append('input',input);
-        body.append('output',output);
+        body.append('output',new_output);
         
         const res = await axios.put('http://localhost:5000/api/problem',body,config)
         dispatch({
