@@ -30,6 +30,15 @@
   align-items: center;
   margin-left: 1rem;
 }
+.profile-link {
+  text-decoration: none;
+  padding-right: 0.5rem;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 .d-flex {
   display: flex;
 }
@@ -158,4 +167,14 @@
 .score-safe {
   background-color: rgba(255, 104, 66, 0.5);
   border: 1px solid #d92c00;
+}
+
+.det-container {
+  justify-content: center;
+  margin-top: 5rem;
+}
+
+.det-form-container {
+  background-color: aliceblue;
+  width: 70%;
 }

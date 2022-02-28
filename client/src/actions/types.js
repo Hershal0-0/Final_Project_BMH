@@ -13,6 +13,10 @@ export const POST_SOLUTION = 'POST_SOLUTION'
 export const GET_SCORE = 'GET_SCORE'
 export const SOLUTION_ERROR = 'SOLUTION_ERROR'
 
+// Action Types For Student Details
+export const STD_DETAILS_SUCCESS = 'STD_DETAILS_SUCCESS'
+export const STD_DETAILS_FAIL = 'STD_DETAILS_FAIL'
+
 // Action Types For Auth
 export const USER_LOADED = 'USER_LOADED'
 export const AUTH_ERROR = 'AUTH_ERROR'

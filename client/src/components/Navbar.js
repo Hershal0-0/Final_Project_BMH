@@ -3,6 +3,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { logout } from '../actions/auth'
+import { Link } from 'react-router-dom'
 
 const Navbar = ({auth,logout}) => {
     if(auth.user !== null){
@@ -10,10 +11,14 @@ const Navbar = ({auth,logout}) => {
             return (
                 <div>
                     <div className="navbar">
-                    <div className="nav-text">
+                    <Link to='/dashboard' className="nav-text">
                         Student Dashboard -{auth.user.name}
-                    </div>
-                    <div>
+                    </Link>
+                    <div className='d-flex'>
+                        <Link to='/student_detail' className='profile-link'>
+                        <i className="far fa-2x fa-id-card"></i>
+                        <>My Profile</>
+                        </Link>
                         <button className="bt nav-bt" onClick={()=>logout()}>
                             <i className="fas fa-sign-out-alt"></i>
                             Logout
@@ -27,15 +32,22 @@ const Navbar = ({auth,logout}) => {
             return (
                 <div>
                     <div className="navbar">
-                    <div className="nav-text">
+                    <Link to='/dashboard' className="nav-text">
                         Faculty Dashboard -{auth.user.name}
-                    </div>
-                    <div>
+                    </Link>
+
+                    <div className='d-flex'>
+                        <Link to='/classes' className='profile-link'>
+                        <i class="fas fa-2x fa-chalkboard-teacher"></i>
+                        <>My Classes</>
+                        </Link>
                         <button className="bt nav-bt" onClick={()=>logout()}>
-                            <i className="fas fa-sign-out-alt"></i>
+                            <i  className="fas fa-sign-out-alt"></i>
                             Logout
                         </button>
                     </div>
+                
+                    
                     </div>
                 </div>
             )

@@ -69,7 +69,8 @@ router.post('/:lang',[
 						return 
 					}
 					else if(!code_error && !timeout){
-						result[ind]=stdout
+						const new_stdout = stdout.replace(/^\s+|\s+$/g, '')
+						result[ind]=new_stdout
 						return 
 					}
 				}
@@ -159,7 +160,10 @@ router.post('/:lang',[
 						return 
 					}
 					else if(!code_error && !timeout){
-						result2[ind]=stdout
+
+						const new_stdout = stdout.replace(/^\s+|\s+$/g, '')
+						result2[ind]=new_stdout
+
 						return 
 					}
 				}
@@ -250,7 +254,10 @@ router.post('/:lang',[
 						return 
 					}
 					else if(!code_error && !timeout){
-						result3[ind]=stdout
+
+						const new_stdout = stdout.replace(/^\s+|\s+$/g, '')
+						result3[ind]=new_stdout
+
 						return 
 					}
 				}
@@ -343,7 +350,10 @@ router.post('/:lang',[
 							return 
 						}
 						else if(!code_error && !timeout){
-							result4[ind]=stdout
+
+							const new_stdout = stdout.replace(/^\s+|\s+$/g, '')
+						    result4[ind]=new_stdout
+
 							return 
 						}
 					}

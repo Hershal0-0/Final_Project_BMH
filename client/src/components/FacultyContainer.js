@@ -18,14 +18,8 @@ const FacultyContainer = ({
     newProbId,
     content}) => {
 
-    const [input,setInput]=useState(`function add(a, b) {
-        return a + b;
-      }
-      `)
-    const [output,setOutput]=useState(`function add(a, b) {
-        return a + b;
-      }
-      `)
+    const [input,setInput]=useState('')
+    const [output,setOutput]=useState('')
     const [formData, setFormData] =useState({
         problem_title:"",
         problem_statement:""        
@@ -36,11 +30,17 @@ const FacultyContainer = ({
     useEffect(()=>{
         if(newProbId!==null){
             console.log(newProbId)
-            addTestcase({
-                input,
-                output,
-                problem_id:newProbId
-            })
+            // let new_output = output
+            // if(new_output[new_output.length-1]=='\n'){
+            //     new_output= new_output.substring(0,new_output.length-1)
+            // }
+            if(input!=="" && output!==""){
+                addTestcase({
+                    input,
+                    output,
+                    problem_id:newProbId
+                })
+            }
         }
     },[newProbId])
     useEffect(()=>{

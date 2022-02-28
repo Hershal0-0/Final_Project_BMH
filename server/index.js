@@ -17,6 +17,8 @@ const userInfo = require("./routes/userInfo")
 const solution = require('./routes/solution')
 const problem = require('./routes/problem')
 const auth = require("./routes/auth")
+const student_details = require('./routes/student_details')
+const faculty_class = require('./routes/faculty_class')
 
 // For Using Imp Environment Variables
 dotenv.config({path: "./config/config.env"})
@@ -52,6 +54,8 @@ app.use('/api/user',userInfo)
 app.use('/api/auth',auth)
 app.use('/api/solution',solution)
 app.use('/api/problem',problem)
+app.use('/api/student_detail',student_details)
+app.use('/api/faculty_class',faculty_class)
 
 app.listen(PORT, ()=>{
     console.log(`Server started on port ${PORT}`)

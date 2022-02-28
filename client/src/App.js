@@ -4,6 +4,8 @@ import {BrowserRouter as Router, Route,Switch} from 'react-router-dom'
 import Trial from "./components/Trial";
 import Login from "./components/Login"
 import Dashboard from './components/Dashboard'
+import StudentDetail from "./components/StudentDetail";
+import FacultyClass from "./components/FacultyClass";
 
 // Import Redux requirements
 import { Provider } from 'react-redux'
@@ -29,6 +31,8 @@ function App() {
             <Route exact path="/login" component={Login} />
             <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/solve/:id" component={Solve} />
+            <Route exact path="/student_detail" component={StudentDetail} />
+            <Route exact path='/classes' component={FacultyClass} />
         </Switch>
       </Router>
     </Provider>
