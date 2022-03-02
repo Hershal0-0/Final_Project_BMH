@@ -17,6 +17,11 @@ export const SOLUTION_ERROR = 'SOLUTION_ERROR'
 export const STD_DETAILS_SUCCESS = 'STD_DETAILS_SUCCESS'
 export const STD_DETAILS_FAIL = 'STD_DETAILS_FAIL'
 
+// Action Types For Faculty Class
+export const GET_CLASS = 'GET_CLASS'
+export const CREATE_CLASS = 'CREATE_CLASS'
+export const FACULTY_CLASS_FAIL = 'FACULTY_CLASS_FAIL'
+
 // Action Types For Auth
 export const USER_LOADED = 'USER_LOADED'
 export const AUTH_ERROR = 'AUTH_ERROR'

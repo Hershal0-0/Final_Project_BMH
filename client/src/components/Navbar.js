@@ -38,7 +38,7 @@ const Navbar = ({auth,logout}) => {
 
                     <div className='d-flex'>
                         <Link to='/classes' className='profile-link'>
-                        <i class="fas fa-2x fa-chalkboard-teacher"></i>
+                        <i className="fas fa-2x fa-chalkboard-teacher"></i>
                         <>My Classes</>
                         </Link>
                         <button className="bt nav-bt" onClick={()=>logout()}>

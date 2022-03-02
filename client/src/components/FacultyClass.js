@@ -1,4 +1,5 @@
 import React,{useEffect,useState} from 'react';
+import ClassesContainer from './ClassesContainer';
 
 // importing redux requirements
 import { connect } from 'react-redux';
@@ -18,6 +19,8 @@ const FacultyClass = ({
         loadUser()
     },[])
 
+    const [content,setContent] = useState('my-classes')
+
     if(auth.user!== null){
         if(!isAuthenticated){
             return (<Redirect to='/login' />)
@@ -26,6 +29,20 @@ const FacultyClass = ({
             return(
                 <>
                 <Navbar />
+                <div>
+                    Faculty Classes
+                    <div style={{marginTop:"2rem"}}  className="d-flex justify-content-center">
+                     <div className="d-flex faculty-container">
+                    <div className="container-tabs d-flex">
+                        <div onClick={()=>setContent('my-classes')}  className="tabs">My Classes</div>                        
+                        <div onClick={()=>setContent('add-class')} className="tabs">Add Class</div>
+                    </div>
+                    <div className="faculty-container-main">
+                        <ClassesContainer content = {content} />
+                    </div>
+                </div>
+            </div> 
+                </div>
                 </>
             )
 

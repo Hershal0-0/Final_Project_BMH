@@ -10,6 +10,19 @@ const auth = require('../middleware/auth')
 
 const router = express.Router()
 
+// @route GET api/faculty_class
+// @desc GET all classes by a specific faculty
+// @acess Private
+router.get('/',[auth],async(req,res,next)=>{
+    try {
+        const fac_class =  await FacultyClass.find({faculty_id:req.user.id})
+        res.json(fac_class)
+    } catch (err) {
+        console.error(err.message)
+        res.status(500).send("Server Error") 
+    }
+})
+
 // @route POST api/faculty_class
 // @desc Create a class
 // @acess Private

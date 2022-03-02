@@ -25,6 +25,21 @@ router.get('/',[auth],async(req,res,next) =>{
     }
 })
 
+// @route GET api/student_details/:year
+// @desc Get student details from a specific year
+// @access Private
+router.get('/:year',[auth],async(req,res,next)=>{
+    try {
+        const year = req.params.year.toUpperCase()
+        const std_details = await StudentDetail.find({year}).select('-subject')
+        res.json(std_details)
+    } catch (err) {
+        console.error(err.message)
+        res.status(500).send("Server Error")
+    }
+})
+
+
 // @route POST api/student_details
 // @desc create a specific student detail
 // @access Private
