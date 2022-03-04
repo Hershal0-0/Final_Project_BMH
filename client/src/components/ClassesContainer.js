@@ -5,12 +5,15 @@ import React,{ useState,useEffect } from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {createClass,getClass} from '../actions/faculty_class'
+import {getDetailByYear} from '../actions/std_details'
 
 
 const ClassesContainer = ({
     createClass,
     getClass,
+    getDetailByYear,
     faculty_class,
+    students,
     content
 }) => {
 
@@ -25,6 +28,10 @@ const ClassesContainer = ({
     })
 
     const {class_name,class_abv,year} = formData
+
+    useEffect(()=>{
+        getDetailByYear(formData.year)
+    },[year])
 
     const onChange = (e)=>{
         setFormData({
@@ -94,6 +101,18 @@ const ClassesContainer = ({
                     <option value="BE">BE</option>
                 </select>
             </div><br />
+            {students.map((student,index)=>{
+                return(
+                    <div style={{width:"100%"}} key={index}>
+                    <div style={{paddingLeft:"0.5rem"}}>
+                        <a style={{fontSize: "1.2rem"}}>{student.name}</a><br />
+                        <a>{student.rollno}</a><br />
+                        <a>Batch: {student.batch}</a>
+                      </div>
+                      <hr style={{width:"90%"}} />
+                </div>
+                )
+            })}
             <input style={{marginBottom:"2rem"}}  type="submit" value="Create a New Class" />
           </form>
       </div>
@@ -103,11 +122,13 @@ const ClassesContainer = ({
 ClassesContainer.propTypes = {
     createClass: PropTypes.func.isRequired,
     getClass: PropTypes.func.isRequired,
+    getDetailByYear: PropTypes.func.isRequired,
     faculty_class: PropTypes.object
 }
 
 const mapStateToProps = (state)=>({
-    faculty_class : state.faculty_class
+    faculty_class : state.faculty_class,
+    students:state.std_details.students
 })
 
-export default connect(mapStateToProps,{createClass,getClass})(ClassesContainer)
+export default connect(mapStateToProps,{createClass,getClass,getDetailByYear})(ClassesContainer)

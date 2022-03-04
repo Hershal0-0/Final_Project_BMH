@@ -23,11 +23,7 @@ const StudentDetail = ({
     loadUser()
   },[])
 
-  useEffect(()=>{
-    if(std_details.year!==null){
-      alert("Your Details Have been Successfully Submitted")
-    }
-  },[std_details])
+
 
   const [formData,setFormData] = useState({
     year:"",
@@ -48,6 +44,7 @@ const StudentDetail = ({
     e.preventDefault()
     console.log(formData);
     createDetail(formData)
+    alert("Your Details Have been Successfully Submitted")
     
   }
 

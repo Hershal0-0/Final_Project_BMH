@@ -1,6 +1,7 @@
 import axios from 'axios'
 import {
     STD_DETAILS_SUCCESS,
+    STD_BY_YEAR,
     STD_DETAILS_FAIL
 } from './types'
 
@@ -27,4 +28,21 @@ export const createDetail = ({year,division,batch}) =>
         })
     }
     }
+
+// Get student details for a specific year
+export const getDetailByYear = (year)=>
+async dispatch =>{
+    try {
+        const res = await axios.get(`http://localhost:5000/api/student_detail/${year}`)  
+        dispatch({
+            type:STD_BY_YEAR,
+            payload: res.data
+        })
+    } catch (err) {    
+        dispatch({
+            type:STD_DETAILS_FAIL,
+            payload: err.response
+        })
+    }
+}
     

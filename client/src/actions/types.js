@@ -15,6 +15,7 @@ export const SOLUTION_ERROR = 'SOLUTION_ERROR'
 
 // Action Types For Student Details
 export const STD_DETAILS_SUCCESS = 'STD_DETAILS_SUCCESS'
+export const STD_BY_YEAR = 'STD_BY_YEAR'
 export const STD_DETAILS_FAIL = 'STD_DETAILS_FAIL'
 
 // Action Types For Faculty Class
