@@ -6,6 +6,7 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {createClass,getClass} from '../actions/faculty_class'
 import {getDetailByYear} from '../actions/std_details'
+import { Redirect,useHistory } from 'react-router-dom'
 
 
 const ClassesContainer = ({
@@ -48,12 +49,7 @@ const ClassesContainer = ({
                     
             // console.log(std_id)
         }
-        const CheckMark = ()=>{
-            if(selected)
-            return(<i className="fas fa-check-square"></i>)
-            return (<></>)
-
-        }
+        
         return(
             <div style={{width:"100%"}}  onClick = {()=> selectStudent(student.student_id)}>
                     <div className="d-flex justify-content-between">
@@ -103,20 +99,27 @@ const ClassesContainer = ({
         alert("New Class Created Successfully")
     }
 
+
+  const ClassRedirect = ({subject})=>{
+
+    const history = useHistory()
+    
+      return(
+        <div onClick={()=> history.push(`/classes/${subject._id}`)}>      
+        <div style={{paddingLeft:"0.5rem"}}>
+          <a style={{fontSize: "2rem"}}>{subject.class_abv}</a><br />
+          <a>{subject.class_name}</a><br />
+          <a>Year: {subject.year}</a>
+        </div>
+        <hr style={{width:"90%"}} />
+        </div>   
+      )
+  }  
   if(content == 'my-classes')
   return(
       <div>
           {faculty_class.classes.map((subject,index)=>{
-              return(
-                  <div key={index}>
-                      <div style={{paddingLeft:"0.5rem"}}>
-                        <a style={{fontSize: "2rem"}}>{subject.class_abv}</a><br />
-                        <a>{subject.class_name}</a><br />
-                        <a>Year: {subject.year}</a>
-                      </div>
-                      <hr style={{width:"90%"}} />
-                  </div>                    
-              )
+              return(<ClassRedirect  key={index} subject={subject} />)
           })}
       </div>
   )

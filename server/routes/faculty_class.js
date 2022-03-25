@@ -23,6 +23,20 @@ router.get('/',[auth],async(req,res,next)=>{
     }
 })
 
+// @route GET api/faculty_class/:id
+// @desc GET all classes by a specific class_id
+// @acess Private
+router.get('/:id',[auth],async(req,res,next)=>{
+    try {
+        const fac_class = await FacultyClass.findById(req.params.id)
+        res.json(fac_class)
+    } catch (err) {
+        console.error(err.message)
+        res.status(500).send("Server Error") 
+    }
+})
+
+
 // @route POST api/faculty_class
 // @desc Create a class
 // @acess Private

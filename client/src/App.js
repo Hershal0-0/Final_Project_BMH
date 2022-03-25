@@ -8,6 +8,7 @@ import StudentDetail from "./components/StudentDetail";
 import FacultyClass from "./components/FacultyClass";
 import ClassDetails from "./components/ClassDetails";
 
+
 // Import Redux requirements
 import { Provider } from 'react-redux'
 import store from './store'
@@ -35,6 +36,7 @@ function App() {
             <Route exact path="/student_detail" component={StudentDetail} />
             <Route exact path='/classes' component={FacultyClass} />
             <Route exact path='/classes/:id' component={ClassDetails} />
+            
         </Switch>
       </Router>
     </Provider>

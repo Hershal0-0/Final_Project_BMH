@@ -19,7 +19,8 @@ const problem = require('./routes/problem')
 const auth = require("./routes/auth")
 const student_details = require('./routes/student_details')
 const faculty_class = require('./routes/faculty_class')
-
+const plag_check = require('./routes/plag_check')
+ 
 // For Using Imp Environment Variables
 dotenv.config({path: "./config/config.env"})
 
@@ -56,6 +57,7 @@ app.use('/api/solution',solution)
 app.use('/api/problem',problem)
 app.use('/api/student_detail',student_details)
 app.use('/api/faculty_class',faculty_class)
+app.use('/api/plag_check',plag_check)
 
 app.listen(PORT, ()=>{
     console.log(`Server started on port ${PORT}`)

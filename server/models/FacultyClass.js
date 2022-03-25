@@ -36,7 +36,23 @@ const FacultySchema = new mongoose.Schema({
                 required:true
             }
         }
-    ]  
+    ]  ,
+    problems:[
+        {
+            problem_id:{
+                type:mongoose.Schema.Types.ObjectId,
+                ref:'problem'
+            },
+            problem_title:{
+                type:String,
+                required:true
+            },
+            problem_statement:{
+                type:String,
+                required:true
+            }
+        }
+    ]
 })
 
 const FacultyClass = mongoose.model('faculty_class_detail',FacultySchema)

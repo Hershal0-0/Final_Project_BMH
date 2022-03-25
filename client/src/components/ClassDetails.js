@@ -25,7 +25,10 @@ const ClassDetails = ({
         if(auth.user.designation=="Faculty"){
         
           return (
-              <Navbar />
+              <div>
+                  <Navbar />
+                    <p>Classes Detail</p>
+              </div>
           )
         }else{
             return (<Redirect to='/dashboard'/>)
