@@ -21,6 +21,8 @@ export const STD_DETAILS_FAIL = 'STD_DETAILS_FAIL'
 // Action Types For Faculty Class
 export const GET_CLASS = 'GET_CLASS'
 export const CREATE_CLASS = 'CREATE_CLASS'
+export const UPDATE_STD = 'UPDATE_STD'
+
 export const FACULTY_CLASS_FAIL = 'FACULTY_CLASS_FAIL'
 
 // Action Types For Auth

@@ -46,9 +46,36 @@ router.post('/',[auth,[
             class_name: req.body.class_name,
             class_abv : req.body.class_abv
         }
-        const faculty_class = new FacultyClass(newClass)
-        await faculty_class.save()
-        res.json(faculty_class)
+        if(req.body.students!=null){
+            console.log("first")
+            std_arr = req.body.students
+            students_obj = []
+            std_arr.forEach(async std_id => {
+                let std_obj = {}
+                const student = await UserInfo.findById(std_id)
+                std_obj={
+                    student_id: std_id,
+                    std_name: student.name,
+                    std_rollno: student.rollno
+                }
+                students_obj.push(std_obj)
+                
+            });
+            setTimeout(async()=>{
+                if(students_obj.length==req.body.students.length){
+                    newClass.students=students_obj
+                    const faculty_class = new FacultyClass(newClass)
+                    await faculty_class.save()
+                    res.json(faculty_class)
+                }
+            },2000)
+                    
+        }
+        else{
+            const faculty_class = new FacultyClass(newClass)
+            await faculty_class.save()
+            res.json(faculty_class)
+        }
     } catch (err) {
         console.error(err.message)
         res.status(500).send("Server Error")

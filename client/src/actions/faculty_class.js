@@ -2,7 +2,8 @@ import axios from 'axios'
 import {
     GET_CLASS,
     CREATE_CLASS,
-    FACULTY_CLASS_FAIL
+    FACULTY_CLASS_FAIL,
+    UPDATE_STD
 } from './types'
 
 // Get all classes from a specific faculty
@@ -23,14 +24,14 @@ async dispatch =>{
 }
 
 // Create a New Class
-export const createClass = ({class_name,class_abv,year})=>
+export const createClass = ({class_name,class_abv,year},students=null)=>
 async dispatch =>{
     const config={
         headers:{
             "Content-Type":"application/json"
         }
     }
-    const body = JSON.stringify({class_name,class_abv,year})
+    const body = JSON.stringify({class_name,class_abv,year,students})
     try {
         const res = await axios.post('http://localhost:5000/api/faculty_class/',body,config)
         dispatch({
@@ -44,3 +45,21 @@ async dispatch =>{
         })
     }
 }
+
+// Updating state with selected students
+export const updateStudents = ({students})=>
+async dispatch =>{
+    try {
+        dispatch({
+            type:UPDATE_STD,
+            payload:students
+        })
+        
+    } catch (err) {
+        dispatch({
+            type: FACULTY_CLASS_FAIL,
+            payload: err.response
+        })
+    }
+}
+

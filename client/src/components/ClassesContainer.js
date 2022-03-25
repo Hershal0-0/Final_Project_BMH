@@ -21,6 +21,57 @@ const ClassesContainer = ({
         getClass()
     },[])
 
+    const [stdSelected,setStdSelected] = useState([])
+    let std_arr = []
+    const handleCallback = (data)=>{
+        // console.log(data)
+        if(std_arr.includes(data)){
+            let new_arr = std_arr.filter((std)=> std!==data)
+            std_arr = new_arr
+            console.log(std_arr)    
+            return
+        }
+        else{
+            std_arr.push(data)
+            console.log(std_arr)
+        }
+    }
+    
+
+    const StdListItem = ({student,sendData})=>{
+        const [selected,setSelected] = useState(false)
+        const selectStudent = (std_id)=>{
+            
+            setSelected(!selected)
+             
+            sendData(std_id)
+                    
+            // console.log(std_id)
+        }
+        const CheckMark = ()=>{
+            if(selected)
+            return(<i className="fas fa-check-square"></i>)
+            return (<></>)
+
+        }
+        return(
+            <div style={{width:"100%"}}  onClick = {()=> selectStudent(student.student_id)}>
+                    <div className="d-flex justify-content-between">
+                      <div style={{paddingLeft:"0.5rem"}}>
+                        <a style={{fontSize: "1.2rem"}}>{student.name}</a><br />
+                        <a>{student.rollno}</a><br />
+                        <a>Batch: {student.batch}</a>
+                      </div>
+                      <div style={{width:"15%",paddingTop:"20px"}}>
+                      {selected==true ? <i className="fas fa-check-square"></i> : <></> }
+                      
+                      </div>
+                    </div>
+                      <hr style={{width:"90%"}} />
+                </div>
+        )
+    }
+
     const [formData,setFormData]=useState({
         class_name:"",
         class_abv:"",
@@ -42,7 +93,14 @@ const ClassesContainer = ({
 
     const handleSubmit = (e)=>{
         e.preventDefault()
-        createClass(formData)
+        // setStdSelected(std_arr)
+        createClass(formData,std_arr)
+        setFormData({
+            class_name:"",
+            class_abv:"",
+            year:"FE" 
+        })
+        alert("New Class Created Successfully")
     }
 
   if(content == 'my-classes')
@@ -103,17 +161,11 @@ const ClassesContainer = ({
             </div><br />
             {students.map((student,index)=>{
                 return(
-                    <div style={{width:"100%"}} key={index}>
-                    <div style={{paddingLeft:"0.5rem"}}>
-                        <a style={{fontSize: "1.2rem"}}>{student.name}</a><br />
-                        <a>{student.rollno}</a><br />
-                        <a>Batch: {student.batch}</a>
-                      </div>
-                      <hr style={{width:"90%"}} />
-                </div>
+                    <StdListItem key={index} student={student} sendData = {handleCallback} />
+                    
                 )
             })}
-            <input style={{marginBottom:"2rem"}}  type="submit" value="Create a New Class" />
+            <input style={{marginBottom:"2rem",marginTop:"1rem"}}  type="submit" value="Create a New Class" />
           </form>
       </div>
   )
@@ -123,12 +175,14 @@ ClassesContainer.propTypes = {
     createClass: PropTypes.func.isRequired,
     getClass: PropTypes.func.isRequired,
     getDetailByYear: PropTypes.func.isRequired,
-    faculty_class: PropTypes.object
+    faculty_class: PropTypes.object,
+    students: PropTypes.array
 }
 
 const mapStateToProps = (state)=>({
     faculty_class : state.faculty_class,
-    students:state.std_details.students
+    students:state.std_details.students,
+    
 })
 
 export default connect(mapStateToProps,{createClass,getClass,getDetailByYear})(ClassesContainer)
