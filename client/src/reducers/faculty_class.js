@@ -2,6 +2,7 @@ import {
     CREATE_CLASS,
     FACULTY_CLASS_FAIL,
     GET_CLASS,
+    GET_CLASS_DETAIL,
     RESET_STD,
     UPDATE_STD
 } from '../actions/types'
@@ -9,7 +10,7 @@ import {
 const initialState = {
     faculty_id:null,
     faculty_name:null,
-    new_classId:null,
+    classId:null,
     class_name:null,
     class_abv:null,
     selected_std:[],
@@ -29,13 +30,24 @@ const faculty_class = (state= initialState,action)=>{
         case CREATE_CLASS:
             return{
                 ...state,
-                new_classId: payload._id,
+                classId: payload._id,
                 faculty_id:payload.faculty_id,
                 faculty_name: payload.faculty_name,
                 class_name: payload.class_name,
                 class_abv: payload.class_abv,
                 year: payload.year,
                 selected_std:payload.students
+            }
+        case GET_CLASS_DETAIL:
+            return {
+                ...state,
+                classId:payload._id,
+                class_name:payload.class_name,
+                class_abv:payload.class_abv,
+                faculty_id:payload.faculty_id,
+                faculty_name:payload.faculty_name,
+                selected_std:payload.students,
+                year:payload.year,
             }
 
         case UPDATE_STD:

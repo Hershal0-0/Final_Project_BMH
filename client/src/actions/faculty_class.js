@@ -3,7 +3,8 @@ import {
     GET_CLASS,
     CREATE_CLASS,
     FACULTY_CLASS_FAIL,
-    UPDATE_STD
+    UPDATE_STD,
+    GET_CLASS_DETAIL
 } from './types'
 
 // Get all classes from a specific faculty
@@ -14,6 +15,23 @@ async dispatch =>{
         dispatch({
             type: GET_CLASS,
             payload: res.data
+        })
+    } catch (err) {
+        dispatch({
+            type: FACULTY_CLASS_FAIL,
+            payload: err.response
+        })
+    }
+}
+
+// Get one Specific Class Detail
+export const getClassDetail = (class_id)=>
+async dispatch => {
+    try {
+        const res = await axios.get(`http://localhost:5000/api/faculty_class/${class_id}`)
+        dispatch({
+            type: GET_CLASS_DETAIL,
+            payload:res.data
         })
     } catch (err) {
         dispatch({
