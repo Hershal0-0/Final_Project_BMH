@@ -26,6 +26,7 @@ router.post('/',[auth,[
     }
     
     try {
+        console.log(req.body,req.user.id);
         const user = await UserInfo.findById(req.user.id).select('-password')
         const problem = await Problem.findById(req.body.problem_id)
         if(!problem){
@@ -33,17 +34,23 @@ router.post('/',[auth,[
             errors: [{msg: "Problem Id is Invalid Try Again"}]
         })
     }
-        const newSolution = {
-            student_id: req.user.id,
-            problem_id: req.body.problem_id,
-            name:user.name,
-            language: req.body.language,
-            code: req.body.code
-        }
-        const solution = new Solution(newSolution)
-        await solution.save()
-        res.json(solution)
-    } catch (err) {
+        // const newSolution = {
+        //     student_id: req.user.id,
+        //     problem_id: req.body.problem_id,
+        //     name:user.name,
+        //     language: req.body.language,
+        //     code: req.body.code
+        // }
+        // const solution = new Solution(newSolution)
+        //await solution.save()
+        const res = await Solution.findOneAndUpdate(
+            {student_id : req.user.id, problem_id : req.body.problem_id},
+            {$set : {name : user.name , language: req.body.langauge, code: req.body.code}},
+            {upsert : true}
+        );
+        res.json(res.name)
+    } 
+    catch (err) {
         console.error(err.message)
         res.status(500).send("Server Error")
     }
