@@ -4,6 +4,7 @@ const {check,validationResult} = require('express-validator')
 // Importing Mongoose Model
 const Problem = require('../models/Problem')
 const UserInfo = require('../models/UserInfo')
+const FacultyClass = require('../models/FacultyClass')
 // Importing Middlewarr
 const auth = require('../middleware/auth')
 
@@ -28,7 +29,8 @@ router.get('/',async(req,res,next)=>{
 // @acess Private
 router.post('/',[auth,[
     check('problem_title',"Problem Title Is Required").not().isEmpty(),
-    check('problem_statement',"Problem Statement is Required").not().isEmpty()    
+    check('problem_statement',"Problem Statement is Required").not().isEmpty(),
+    check('facultyClass_id',"FacultyClass Id is required").not().isEmpty()    
 ]],async(req,res,next)=>{
     const errors = validationResult(req)
     if(!errors.isEmpty()){
@@ -46,7 +48,16 @@ router.post('/',[auth,[
         }
         const problem = new Problem(newProblem)
         await problem.save()
-        res.json(problem)
+        const fac_class = await FacultyClass.findByIdAndUpdate(req.body.facultyClass_id,
+            {
+                $push: {"problems": { 
+                    problem_id:problem._id, 
+                    problem_title:req.body.problem_title,
+                    problem_statement: req.body.problem_statement
+                 }}},
+            {safe:true,new:true})
+        res.json(
+            problem)
     } catch (err) {
         console.error(err.message)
         res.status(500).send("Server Error")

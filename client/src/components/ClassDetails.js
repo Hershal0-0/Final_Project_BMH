@@ -2,6 +2,8 @@ import React, {useEffect} from 'react'
 import Navbar from './Navbar'
 import {Redirect} from 'react-router-dom'
 
+import ClassDetailContainer from './ClassDetailContainer'
+
 // importing reddux requirements
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
@@ -33,7 +35,22 @@ const ClassDetails = ({
           return (
               <div>
                   <Navbar />
-                    <p>Classes Detail</p>
+                  <p>Classes Detail</p>
+                  <div className="d-flex justify-content-center cl-detail-container">
+                    <div style={{flex:"1"}} className="d-flex width-100">
+                          <div  className="d-flex flex-column width-100" >
+                          <div className='diff-tabs d-flex ' >Problems</div>
+                          <div style={{ height:"100%"}} >Hello</div>
+                          </div>
+                    </div>
+                    <div style={{flex:"3"}} className="d-flex flex-column width-100">
+                            <div className="d-flex flex-column width-100">
+                            <div className='diff-tabs d-flex '>Problem Description</div>
+                            <ClassDetailContainer class_id={match.params.id} />
+                            </div>
+                    </div>
+                      
+                  </div>
               </div>
           )
         }else{

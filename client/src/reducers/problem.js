@@ -30,6 +30,7 @@ const problem = (state=initialState,action)=>{
         case ADD_TESTCASE:
             return{
                 ...state,
+                newProbId:null,
                 problems: state.problems.map(problem=>
                     problem._id===payload.id
                         ?{...problem,testcases:payload.testcases}
@@ -38,6 +39,7 @@ const problem = (state=initialState,action)=>{
         case PROBLEM_ERROR:
             return{
                 ...state,
+                newProbId:null,
                 error:payload
             }
         default:
