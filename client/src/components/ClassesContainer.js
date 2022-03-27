@@ -186,6 +186,7 @@ const mapStateToProps = (state)=>({
     faculty_class : state.faculty_class,
     students:state.std_details.students,
     
+    
 })
 
 export default connect(mapStateToProps,{createClass,getClass,getDetailByYear})(ClassesContainer)

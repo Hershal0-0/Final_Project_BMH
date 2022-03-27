@@ -14,6 +14,7 @@ const initialState = {
     class_name:null,
     class_abv:null,
     selected_std:[],
+    problems:[],
     year:null,
     classes:[],
     error: null
@@ -47,6 +48,7 @@ const faculty_class = (state= initialState,action)=>{
                 faculty_id:payload.faculty_id,
                 faculty_name:payload.faculty_name,
                 selected_std:payload.students,
+                problems:payload.problems,
                 year:payload.year,
             }
 

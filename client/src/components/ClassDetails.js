@@ -33,17 +33,27 @@ const ClassDetails = ({
         if(auth.user.designation=="Faculty"){
         
           return (
-              <div>
+              <div className='mb-2'>
                   <Navbar />
                   <p>Classes Detail</p>
                   <div className="d-flex justify-content-center cl-detail-container">
-                    <div style={{flex:"1"}} className="d-flex width-100">
-                          <div  className="d-flex flex-column width-100" >
+                    <div style={{flex:"1"}} className="d-flex border width-100">
+                          <div  className="d-flex  flex-column width-100" >
                           <div className='diff-tabs d-flex ' >Problems</div>
-                          <div style={{ height:"100%"}} >Hello</div>
+                          {faculty_class.problems.map(((problem,index)=>{
+                              return(
+                                  <div key={index} className="ml-1 mt-1" >
+                                      <div className="d-flex flex-column">
+                                      <div>{problem.problem_title}</div>
+                                      <div>{problem.problem_statement}</div>
+                                      </div>
+                                      <hr style={{width:"80%"}} />
+                                  </div>
+                              )
+                          }))}
                           </div>
                     </div>
-                    <div style={{flex:"3"}} className="d-flex flex-column width-100">
+                    <div style={{flex:"3"}} className="d-flex border flex-column width-100">
                             <div className="d-flex flex-column width-100">
                             <div className='diff-tabs d-flex '>Problem Description</div>
                             <ClassDetailContainer class_id={match.params.id} />

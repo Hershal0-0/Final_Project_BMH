@@ -184,6 +184,22 @@
   width: 100%;
 }
 
+.border {
+  border: 1px solid black;
+}
+
+.mb-2 {
+  margin-bottom: 2rem;
+}
+
+.ml-1 {
+  margin-left: 1rem;
+}
+
+.mt-1 {
+  margin-top: 1rem;
+}
+
 .flex-column {
   flex-direction: column;
 }

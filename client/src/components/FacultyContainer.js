@@ -63,7 +63,7 @@ const FacultyContainer = ({
                 {problems.map((problem,index)=>{
                     if(problem.faculty_id==user._id){
                         
-                        console.log(user._id)
+                        // console.log(user._id)
                         return(
                             <div key={index}>
                                 {problem.problem_title}
