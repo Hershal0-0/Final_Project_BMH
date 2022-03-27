@@ -25,7 +25,7 @@ async dispatch =>{
 }
 
 // Add a Problem
-export const addProblem = (formData)=>
+export const addProblem = (formData,class_id)=>
 async dispatch =>{
     try {
         const config = {
@@ -33,6 +33,7 @@ async dispatch =>{
                 "Content-Type":"application/json"
             }
         }
+        formData.facultyClass_id = class_id
         const body = JSON.stringify(formData)
         const res = await axios.post('http://localhost:5000/api/problem',body,config)
         dispatch({

@@ -20,6 +20,7 @@ export const STD_DETAILS_FAIL = 'STD_DETAILS_FAIL'
 
 // Action Types For Faculty Class
 export const GET_CLASS = 'GET_CLASS'
+export const GET_CLASS_DETAIL = 'GET_CLASS_DETAIL'
 export const CREATE_CLASS = 'CREATE_CLASS'
 export const UPDATE_STD = 'UPDATE_STD'
 
