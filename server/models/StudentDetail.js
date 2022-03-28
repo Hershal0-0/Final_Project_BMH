@@ -27,8 +27,21 @@ const StudentDetailSchema = new mongoose.Schema({
     },
     subject:[
         {
+            facultyClass_id:{
+                type: mongoose.Schema.Types.ObjectId,
+                required:true
+            },
             subject_name:{
                 type: String,
+                required:true
+            },
+            subject_abv:{
+                type:String,
+                required:true
+            },
+            faculty_name:{
+                type:String,
+                required:true
             }
         }
     ]

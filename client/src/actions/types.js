@@ -23,6 +23,7 @@ export const GET_CLASS = 'GET_CLASS'
 export const GET_CLASS_DETAIL = 'GET_CLASS_DETAIL'
 export const CREATE_CLASS = 'CREATE_CLASS'
 export const UPDATE_STD = 'UPDATE_STD'
+export const UPDATE_PROB = 'UPDATE_PROB'
 
 export const FACULTY_CLASS_FAIL = 'FACULTY_CLASS_FAIL'
 

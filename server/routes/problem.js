@@ -56,8 +56,7 @@ router.post('/',[auth,[
                     problem_statement: req.body.problem_statement
                  }}},
             {safe:true,new:true})
-        res.json(
-            problem)
+        res.json({problem,fac_class})
     } catch (err) {
         console.error(err.message)
         res.status(500).send("Server Error")

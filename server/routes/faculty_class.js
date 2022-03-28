@@ -4,7 +4,7 @@ const {check, validationResult} = require('express-validator')
 // Importing mongoose models
 const UserInfo = require('../models/UserInfo')
 const FacultyClass = require('../models/FacultyClass')
-
+const StudentDetail = require('../models/StudentDetail')
 // Importing middleware
 const auth = require('../middleware/auth')
 
@@ -80,6 +80,18 @@ router.post('/',[auth,[
                     newClass.students=students_obj
                     const faculty_class = new FacultyClass(newClass)
                     await faculty_class.save()
+                    std_arr.forEach(async(std_id)=>{
+                        const std_detail = await StudentDetail.findOneAndUpdate(
+                            {student_id: std_id},
+                            {$push: {"subject":{
+                                facultyClass_id: faculty_class._id,
+                                subject_name: faculty_class.class_name,
+                                subject_abv: faculty_class.class_abv,
+                                faculty_name: faculty_class.faculty_name,
+                            }}},
+                            {safe:true}
+                            )
+                    })
                     res.json(faculty_class)
                 }
             },2000)
@@ -116,9 +128,9 @@ router.put('/',[auth,[
         }
         students_obj.push(std_obj)
         
-
-    });
-    
+            
+        });
+        
         const faculty_class = await FacultyClass.findById(req.body.class_id)
         faculty_class.students = students_obj
         await faculty_class.save()

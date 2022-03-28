@@ -4,6 +4,7 @@ import {
     GET_CLASS,
     GET_CLASS_DETAIL,
     RESET_STD,
+    UPDATE_PROB,
     UPDATE_STD
 } from '../actions/types'
 
@@ -36,6 +37,7 @@ const faculty_class = (state= initialState,action)=>{
                 faculty_name: payload.faculty_name,
                 class_name: payload.class_name,
                 class_abv: payload.class_abv,
+                classes:[...state.classes,payload],
                 year: payload.year,
                 selected_std:payload.students
             }
@@ -50,6 +52,12 @@ const faculty_class = (state= initialState,action)=>{
                 selected_std:payload.students,
                 problems:payload.problems,
                 year:payload.year,
+            }
+        
+        case UPDATE_PROB:
+            return{
+                ...state,
+                problems:payload.problems
             }
 
         case UPDATE_STD:

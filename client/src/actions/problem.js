@@ -3,7 +3,8 @@ import {
     GET_PROBLEMS,
     POST_PROBLEM,
     ADD_TESTCASE,
-    PROBLEM_ERROR
+    PROBLEM_ERROR,
+    UPDATE_PROB
 } from '../actions/types'
 
 // Get All Problems
@@ -38,7 +39,11 @@ async dispatch =>{
         const res = await axios.post('http://localhost:5000/api/problem',body,config)
         dispatch({
             type: POST_PROBLEM,
-            payload : res.data
+            payload : res.data.problem
+        })
+        dispatch({
+            type:UPDATE_PROB,
+            payload: res.data.fac_class
         })
         return res.data._id
 
