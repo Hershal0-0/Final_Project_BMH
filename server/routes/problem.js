@@ -84,12 +84,20 @@ router.put('/',[auth,[
                 errors: [{msg: "Problem Id is Invalid Try Again"}]
             })
         }
-        problem.testcases.unshift({
-            input:req.body.input,
-            output:req.body.output
-        })
-        await problem.save()
-        res.json(problem)
+        // problem.testcases.unshift({
+        //     input:req.body.input,
+        //     output:req.body.output
+        // })
+        // await problem.save()
+        const prob1 = await Problem.findOneAndUpdate(
+            {_id:req.body.problem_id},
+            {$push : {"testcases": {
+                input: req.body.input,
+                output: req.body.output
+            }}},
+            {new:true}
+        )
+        res.json(prob1)
 
     } catch (err) {
         console.error(err.message)

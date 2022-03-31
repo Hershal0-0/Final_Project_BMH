@@ -26,10 +26,10 @@ const ClassDetails = ({
     },[])
 
     if(auth.user !== null){
-        
         if(!isAuthenticated){
           return (<Redirect to='/login'/> )
         }
+        
         if(auth.user.designation=="Faculty"){
         
           return (

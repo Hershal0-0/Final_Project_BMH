@@ -1,5 +1,6 @@
 import React,{useEffect} from "react"
 import {BrowserRouter as Router, Route,Switch} from 'react-router-dom'
+import "react-tippy/dist/tippy.css"
 // Importing Components
 import Trial from "./components/Trial";
 import Login from "./components/Login"
