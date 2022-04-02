@@ -1,6 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 const Problem = ({problem}) => {
+    
+
     return (
         <div className="d-flex problem">
             <div style={{marginLeft:"0.5rem"}}>
@@ -12,7 +14,7 @@ const Problem = ({problem}) => {
                 </div>
             </div>
             <div className="solve-btn-container">
-                <button className="solve-btn"><Link to={`/solve/${problem._id}`} >Solve Now</Link></button>
+                <button className="solve-btn"><Link to={`/solve/${problem.problem_id}`} >Solve Now</Link></button>
             </div>
         </div>
     )

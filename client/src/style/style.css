@@ -184,6 +184,10 @@
   width: 100%;
 }
 
+.width-90 {
+  width: 90%;
+}
+
 .border {
   border: 1px solid black;
 }
@@ -237,4 +241,9 @@
 .testcases {
   width: 60%;
   left: 0;
+}
+
+.std-dashboard {
+  margin: 2rem auto 2rem auto;
+  height: 40rem;
 }

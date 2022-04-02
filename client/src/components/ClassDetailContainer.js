@@ -51,12 +51,15 @@ const ClassDetailContainer = ({
                 })
             })
         }
-        setTestcases([])
-        setFormData({
-          problem_title:"",
-          problem_statement:""   
-        })
-        setPrevTestcase(["",""])
+        setTimeout(()=>{
+
+          setTestcases([])
+          setFormData({
+            problem_title:"",
+            problem_statement:""   
+          })
+          setPrevTestcase([])
+        },2000)
     }
 },[newProbId])
 

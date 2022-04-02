@@ -24,7 +24,7 @@ router.get('/',[auth],async(req,res,next)=>{
 })
 
 // @route GET api/faculty_class/:id
-// @desc GET all classes by a specific class_id
+// @desc GET classe by a specific class_id
 // @acess Private
 router.get('/:id',[auth],async(req,res,next)=>{
     try {
@@ -88,6 +88,7 @@ router.post('/',[auth,[
                                 subject_name: faculty_class.class_name,
                                 subject_abv: faculty_class.class_abv,
                                 faculty_name: faculty_class.faculty_name,
+                
                             }}},
                             {safe:true}
                             )

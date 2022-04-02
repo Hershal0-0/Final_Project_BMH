@@ -12,7 +12,7 @@ const auth = require('../middleware/auth')
 
 const router = express.Router()
 
-// @route GET api/student_details
+// @route GET api/student_detail
 // @desc Get the specific student details
 // @access Private
 router.get('/',[auth],async(req,res,next) =>{
@@ -25,7 +25,7 @@ router.get('/',[auth],async(req,res,next) =>{
     }
 })
 
-// @route GET api/student_details/:year
+// @route GET api/student_detail/:year
 // @desc Get student details from a specific year
 // @access Private
 router.get('/:year',[auth],async(req,res,next)=>{
