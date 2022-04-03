@@ -7,9 +7,10 @@ const router = express.Router()
 const Solution = require('../models/Solution')
 const UserInfo = require('../models/UserInfo')
 
-router.get('/',[auth],async (req,res,next)=>{
+router.get('/',async (req,res,next)=>{
     try{
         const sols = await Solution.find({});
+        console.log(sols)
         arr1=[]
         sols.forEach((solution)=>{
             let arr = sols.filter((solution1)=> {
@@ -21,10 +22,10 @@ router.get('/',[auth],async (req,res,next)=>{
             })
            
         })
-        console.log(arr1)
-        setTimeout(()=>{
-            res.send(arr1)
-        },3000);
+        console.log(arr1);
+        
+        res.send(arr1);
+        
     }
     catch{
         console.log("Error");
