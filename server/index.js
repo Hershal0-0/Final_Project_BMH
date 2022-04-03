@@ -20,6 +20,7 @@ const auth = require("./routes/auth")
 const student_details = require('./routes/student_details')
 const faculty_class = require('./routes/faculty_class')
 const plag_check = require('./routes/plag_check')
+
  
 // For Using Imp Environment Variables
 dotenv.config({path: "./config/config.env"})
